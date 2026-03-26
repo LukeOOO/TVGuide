@@ -1,20 +1,31 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+import HomeNavigator from './src/navigators/Home';
+import ShowsNavigator from './src/navigators/Shows';
+import EpisodesNavigator from './src/navigators/Episodes';
+
+const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <StatusBar style="light" hidden={false} />
+      <Drawer.Navigator
+        screenOptions={{
+          headerShown: false,
+          drawerStyle: { backgroundColor: '#1a1a2e' },
+          drawerLabelStyle: { color: '#ffffff', fontSize: 16 },
+          drawerActiveTintColor: '#7c6fff',
+          drawerInactiveTintColor: '#9999bb',
+        }}
+      >
+        <Drawer.Screen name="Home" component={HomeNavigator} />
+        <Drawer.Screen name="Browse Shows" component={ShowsNavigator} />
+        <Drawer.Screen name="Browse Episodes" component={EpisodesNavigator} />
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
